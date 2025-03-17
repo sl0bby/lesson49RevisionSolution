@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int calculate_Exteme_Colums_Sum(int** matrix, int n, int m);
+void find_last_local_minimum(int** matrix, int n, int m, int& row, int& col);
 int main() {
 	int n;
 	int m;
@@ -22,8 +22,20 @@ int main() {
 		}
 		cout << endl;
 	}
-	int result = calculate_Exteme_Colums_Sum(matrix, n, m);
-	cout << "sum of coloums with exteme elements: " << result << endl;
+
+	int row, col;
+	find_last_local_minimum(matrix, n, m, row, col);
+
+	if (row == -1)
+	{
+		cout << "matrix has no local minimum" << endl;
+	}
+	else {
+		cout << "The last local minimum contains coordinates ["
+			<< row << ";" << col << "] and it matters "
+			<< matrix[row - 1][col - 1] << "." << endl;
+	}
+
 
 	for (int i = 0; i < n; i++)
 	{

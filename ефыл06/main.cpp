@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int calculate_Exteme_Colums_Sum(int** matrix, int n, int m);
+int isLocalMaximum(int** matrix, int i, int j, int n, int m);
 int main() {
 	int n;
 	int m;
@@ -22,8 +22,21 @@ int main() {
 		}
 		cout << endl;
 	}
-	int result = calculate_Exteme_Colums_Sum(matrix, n, m);
-	cout << "sum of coloums with exteme elements: " << result << endl;
+
+		int minLocalMax = 0;
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; ++j)
+			{
+				if (isLocalMaximum(matrix, i , j, n, m)) {
+					if (matrix[i][j] < minLocalMax) {
+						minLocalMax = matrix[i][j];
+					}
+				}
+			}
+		}
+		cout << "Min local maximum: " << minLocalMax;
+
 
 	for (int i = 0; i < n; i++)
 	{
@@ -31,4 +44,5 @@ int main() {
 	}
 	delete[] matrix;
 	return 0;
+
 }

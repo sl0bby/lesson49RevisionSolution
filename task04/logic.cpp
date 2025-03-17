@@ -1,35 +1,37 @@
-#include <iostream>
-using namespace std;
-
-int calculateColumnSumWithExtremes(int** matrix, int n, int m) {
-	int maxElement = matrix[0][0];
+int calculate_Exteme_Colums_Sum(int** matrix, int n, int m) {
 	int minElement = matrix[0][0];
+	int maxElement = matrix[0][0];
 
-	bool* hasExtreme = false;
-
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
+	{
 		for (int j = 0; j < m; j++) {
-			maxElement = max(maxElement, matrix[i][j]);
-			minElement = min(minElement, matrix[i][j]);
-		}
-	}
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			if (matrix[i][j] == maxElement || matrix[i][j] == minElement) {
-				hasExtreme[j] = true;
+			if (matrix[i][j] < minElement)
+			{
+				minElement = matrix[i][j];
+			}
+			if (matrix[i][j] > maxElement)
+			{
+				maxElement = matrix[i][j];
 			}
 		}
 	}
-
-	int columnSum = 0;
-	for (int j = 0; j < m; j++) {
-		if (hasExtreme[j]) {
+	int sum = 0;
+	for (int j = 0; j < m; j++)
+	{
+		bool hasExtreme = false;
+		for (int i = 0; i < n; i++)
+		{
+			if (matrix[i][j] == minElement || matrix[i][j] == maxElement) {
+				hasExtreme = true;
+				break;
+			}
+		}
+		if (hasExtreme)
+		{
 			for (int i = 0; i < n; i++) {
-				columnSum += matrix[i][j];
+				sum += matrix[i][j];
 			}
 		}
 	}
-
-	return columnSum;
+	return sum;
 }
